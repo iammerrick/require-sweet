@@ -5,7 +5,6 @@ define(['sweet', 'escodegen'], function (sweet, escodegen) {
     'use strict';
     
     var fs, getXhr,
-        progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'],
         fetchText = function () {
             throw new Error('Environment unsupported.');
         },
@@ -27,17 +26,7 @@ define(['sweet', 'escodegen'], function (sweet, escodegen) {
             if (typeof XMLHttpRequest !== "undefined") {
                 return new XMLHttpRequest();
             } else {
-                for (i = 0; i < 3; i++) {
-                    progId = progIds[i];
-                    try {
-                        xhr = new ActiveXObject(progId);
-                    } catch (e) {}
-
-                    if (xhr) {
-                        progIds = [progId];  // so faster next time
-                        break;
-                    }
-                }
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
             }
 
             if (!xhr) {
