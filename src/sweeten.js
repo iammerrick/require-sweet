@@ -1,7 +1,7 @@
 /*jshint */
 /*global define, window, XMLHttpRequest, importScripts, Packages, java,
   ActiveXObject, process, require, console */
-define(['sweet', 'escodegen'], function (sweet, escodegen) {
+define(['sweet'], function (sweet) {
     'use strict';
     
     var fs, getXhr,
@@ -113,7 +113,7 @@ define(['sweet', 'escodegen'], function (sweet, escodegen) {
             var path = parentRequire.toUrl(name + '.js');
                 
             fetchText(path, function (text) {
-                text = escodegen.generate(sweet.parse(text));
+                text = sweet.compile(text);
 
                 //Hold on to the transformed text if a build.
                 if (config.isBuild) {
